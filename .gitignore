@@ -1,0 +1,13 @@
+node_modules/
+config/default.json
+
+README.md
+
+
+client/.env.development
+client/.env.production
+client/.env
+
+.env
+.env.development
+.env.production

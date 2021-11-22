@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { CURSOR_FLAGS } = require('mongoose/node_modules/mongodb');
 const Schema = mongoose.Schema;
 
+const populateChildren = require('../utils/utils');
 const Exertion = require('./Exertion');
 
 // User
@@ -44,6 +45,35 @@ UserSchema.virtual('mainExertions')
       )
     }
   )
+UserSchema.virtual('allExertions')
+.get(
+  async function() {
+    let exertions 
+      = await Exertion
+        .find({ owner: this, depth: 0 })
+        .populate({
+          path: 'children',
+          populate: {
+            path: 'children',
+            populate: {
+              path: 'children',
+              populate: {
+                path: 'children',
+                populate: {
+                  path: 'children',
+                  populate: {
+                    path: 'children'
+                  }
+                }
+              }
+            }
+          }
+        })
+    return (
+      exertions.length > 0 ? exertions : []
+    )
+  }
+)
 UserSchema.virtual('totalTargetHoursLeft')
   .get(
     async function() { 
@@ -55,9 +85,6 @@ UserSchema.virtual('totalTargetHoursLeft')
       return total
     }
   );
-
-
-
 
 // instance methods
 UserSchema.method(

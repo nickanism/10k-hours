@@ -25,7 +25,7 @@ import {
   secondsToMinutes, playSound
 } from '../../utils/timeUtils';
 import { 
-  exertionListParsing 
+  exertionUnorderedListParsing 
 } from '../../utils/parseUtils'
 
 const Pomodoro = () => {
@@ -63,7 +63,7 @@ const Pomodoro = () => {
 
   const exertionListDisplay = (
     <div>
-      {exertionListParsing(exertionList)}
+      {exertionUnorderedListParsing(exertionList)}
     </div>
   )
 

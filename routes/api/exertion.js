@@ -11,7 +11,8 @@ const Exertion = require('../../models/Exertion');
 const { 
   hourToSeconds,
   secToHour,
-  mainExertionResponse 
+  mainExertionResponse,
+  populateChildren
 } = require('../../utils/utils')
 
 // @route     GET api/exertion/main
@@ -23,6 +24,28 @@ router.get(
   async (req, res) => {
     let user = req.user
     let exertions = await user.mainExertions;
+    const totalTargetHoursLeft 
+      = await user.totalTargetHoursLeft;
+    
+    // simplify the data
+    exertions = mainExertionResponse(exertions)
+
+    return res.status(200).json({ 
+      exertions: exertions,
+      totalTargetHoursLeft: totalTargetHoursLeft
+    })
+  }
+)
+
+// @route     GET api/exertion/all
+// @desc      Get current user's all exertions
+// @access    Private
+router.get(
+  '/all',
+  auth,
+  async (req, res) => {
+    let user = req.user
+    let exertions = await user.allExertions;
     const totalTargetHoursLeft 
       = await user.totalTargetHoursLeft;
     

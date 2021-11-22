@@ -28,7 +28,7 @@ export const minutesToSeconds = minutes => {
 export const durationToHMS = duration => {
   const hours = Math.floor(duration / 3600)
   const minutes = Math.floor(Math.floor(duration % 3600) / 60)
-  const seconds = Math.floor(Math.floor(Math.floor(duration % 3600) / 60) / 60)
+  const seconds = Math.floor(duration % 60)
 
   return { hours, minutes, seconds }
 }
@@ -43,7 +43,7 @@ export const pomodoroExertionListDisplay
       
       const arrayElement = {
         name: exertion.name, 
-        timeLeft:`${hours} hours and ${minutes} minutes and ${seconds} left`
+        timeLeft:`${hours} hours and ${minutes} minutes and ${seconds} seconds left`
       }
 
       let children
@@ -70,7 +70,7 @@ export const genericExertionListDisplay
         id: exertion._id,
         name: exertion.name, 
         skill: exertion.skill,
-        timeLeft:`${hours} hours and ${minutes} minutes and ${seconds} left`
+        timeLeft:`${hours} hours and ${minutes} minutes and ${seconds} seconds left`
       }
 
       let children

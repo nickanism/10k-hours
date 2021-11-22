@@ -1,7 +1,8 @@
 import {
   BrowserRouter,
   Routes,
-  Route
+  Route,
+  Link
 } from 'react-router-dom'
 
 import { Navbar } from './app/components/Navbar'
@@ -11,7 +12,10 @@ import Pomodoro from './features/pomodoro/Pomodoro'
 import UserSignUpForm from './features/auth/UserSignUpForm'
 import UserSignIn from './features/auth/UserSignIn'
 import MainExertionCreateForm from './features/exertion/MainExertionCreateForm';
+import PartExertionCreateForm from './features/exertion/PartExertionCreateForm';
 import ExertionDisplay from './features/exertion/ExertionDisplay';
+import EditExertionForm from './features/exertion/EditExertionForm';
+import FinishDuration from './features/exertion/FinishDuration';
 
 // Style
 import './App.css';
@@ -60,10 +64,41 @@ function App() {
             element={
               <PrivateRoute>
                 <ExertionDisplay></ExertionDisplay>
-                <MainExertionCreateForm></MainExertionCreateForm>
+                <Link to="create-main">
+                  Create Main Exertion
+                </Link>
+                <br />
+                <Link to="create-part">
+                  Create Part Exertion
+                </Link>
               </PrivateRoute>
             }
-          />
+          >
+            <Route 
+              path="create-main"
+              element={
+                <MainExertionCreateForm></MainExertionCreateForm>
+              }
+            />
+            <Route 
+              path="create-part"
+              element={
+                <PartExertionCreateForm></PartExertionCreateForm>
+              }
+            />
+            <Route 
+              path="edit"
+              element={
+                <EditExertionForm></EditExertionForm>
+              }
+            />
+            <Route 
+              path="finish-duration"
+              element={
+                <FinishDuration></FinishDuration>
+              }
+            />
+          </Route>
           <Route
             path="/pomodoro"
             element={

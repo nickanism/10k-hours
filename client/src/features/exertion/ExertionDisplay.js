@@ -2,13 +2,14 @@ import React, { useEffect } from 'react';
 import { 
   connect, useDispatch, useSelector
 } from 'react-redux';
+import { Outlet } from 'react-router-dom'
 
 import { 
   selectExertionList, selectTotalTargetHoursLeft,
   fetchAllExertions, selectLoading 
 } from './exertionSlicer';
 import { 
-  exertionListParsing 
+  exertionUnorderedListParsing 
 } from '../../utils/parseUtils'
 import Spinner from '../../app/components/Spinner';
 
@@ -25,8 +26,9 @@ const ExertionDisplay = () => {
 
   const exertionListDisplay = (
     <div>
+      <h1> Your Exertoins </h1>
       {
-        (exertionList && !loading) ? exertionListParsing(exertionList) : 
+        (exertionList && !loading) ? exertionUnorderedListParsing(exertionList) : 
         <Spinner></Spinner>
       }
       <br />
@@ -37,6 +39,7 @@ const ExertionDisplay = () => {
   return (
     <>
       {exertionListDisplay}
+      <Outlet />
     </>
   )
 

@@ -7,7 +7,7 @@ import { Outlet } from 'react-router-dom'
 import { 
   selectExertionList, selectTotalTargetHoursLeft,
   fetchAllExertions, selectLoading 
-} from './exertionSlicer';
+} from './exertionSlice';
 import { 
   exertionUnorderedListParsing 
 } from '../../utils/parseUtils'
@@ -26,7 +26,7 @@ const ExertionDisplay = () => {
 
   const exertionListDisplay = (
     <div>
-      <h1> Your Exertoins </h1>
+      <h1> Your Exertions </h1>
       {
         (exertionList && !loading) ? exertionUnorderedListParsing(exertionList) : 
         <Spinner></Spinner>

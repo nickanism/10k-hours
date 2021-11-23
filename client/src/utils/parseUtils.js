@@ -51,7 +51,9 @@ export const exertionUnorderedListParsing = exertionList => {
         parsedList.map(exertion => {
           return (
             <li key={exertion.name}>
-              {exertion.name}: {exertion.timeLeft}
+              <h4>{exertion.name}</h4>
+              {exertion.targetDuration} <br />
+              {exertion.timeLeft}
               {exertionUnorderedListParsing(exertion.children)}
             </li>
           )

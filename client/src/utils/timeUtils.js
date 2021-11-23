@@ -65,12 +65,16 @@ export const genericExertionListDisplay
     exertions.map(exertion => {
       const { hours, minutes, seconds } 
         = durationToHMS(exertion.targetDurationLeft)
-      
+
+      const { hours: targetHours, minutes: targetMinutes, seconds: targetSeconds }
+        = durationToHMS(exertion.targetDuration)
+
       const arrayElement = {
         id: exertion._id,
         name: exertion.name, 
         skill: exertion.skill,
-        timeLeft:`${hours} hours and ${minutes} minutes and ${seconds} seconds left`
+        targetDuration: `Goal: ${prependZero(targetHours)}:${prependZero(targetMinutes)}:${prependZero(targetSeconds)}`,
+        timeLeft:`Left: ${prependZero(hours)}:${prependZero(minutes)}:${prependZero(seconds)}`
       }
 
       let children

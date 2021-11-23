@@ -3,7 +3,7 @@ import {
   connect, useDispatch
 } from 'react-redux';
 
-import { createExertion } from './exertionSlicer';
+import { createExertion } from './exertionSlice';
 
 const MainExertionCreateForm = () => {
   const [formData, setFormData] = useState({

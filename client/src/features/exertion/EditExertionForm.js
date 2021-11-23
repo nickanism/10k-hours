@@ -7,7 +7,7 @@ import {
   editExertion, 
   selectExertionList,
   fetchAllExertions 
-} from './exertionSlicer';
+} from './exertionSlice';
 import { 
   exertionListValidate,
   exertionOptionList 

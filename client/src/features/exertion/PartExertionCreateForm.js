@@ -7,7 +7,7 @@ import {
   createPartExertion, 
   selectExertionList,
   fetchAllExertions 
-} from './exertionSlicer';
+} from './exertionSlice';
 import { 
   exertionListValidate,
   exertionOptionList 
@@ -69,6 +69,7 @@ const PartExertionCreateForm = () => {
           value={parentExertionId}
           onChange={onChange}
         >
+          <option>Please Select</option>
           {mainExertionOptions}
         </select>
         <br/>

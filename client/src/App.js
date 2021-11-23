@@ -16,6 +16,7 @@ import PartExertionCreateForm from './features/exertion/PartExertionCreateForm';
 import ExertionDisplay from './features/exertion/ExertionDisplay';
 import EditExertionForm from './features/exertion/EditExertionForm';
 import FinishDuration from './features/exertion/FinishDuration';
+import Stopwatch from './features/stopwatch/Stopwatch';
 
 // Style
 import './App.css';
@@ -71,6 +72,10 @@ function App() {
                 <Link to="create-part">
                   Create Part Exertion
                 </Link>
+                <br />
+                <Link to="finish-duration">
+                  Edit Finish Duration
+                </Link>
               </PrivateRoute>
             }
           >
@@ -108,6 +113,15 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route
+            path="/stopwatch"
+            element={
+              <PrivateRoute>
+                <Stopwatch></Stopwatch>
+              </PrivateRoute>
+            }
+          >
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>

@@ -27,6 +27,7 @@ export const Navbar = () => {
       <li><Link to='/dashboard'>Dashboard</Link></li>
       <li><Link to='/exertions'>Exertions</Link></li>
       <li><Link to='/pomodoro'>Pomodoro</Link></li>
+      <li><Link to='/stopwatch'>Stopwatch</Link></li>
       <li>
         <a onClick={logout} href='/signin'>
           Logout

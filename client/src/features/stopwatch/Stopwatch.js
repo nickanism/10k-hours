@@ -4,16 +4,18 @@ import {
 } from 'react-redux';
 
 import { 
-  operateFinishedDuration, 
-  selectExertionList,
-  fetchAllExertions, updating 
-} from './exertionSlice';
+  fetchAllExertions, selectExertionList, 
+  operateFinishedDuration
+} from '../exertion/exertionSlice';
+import {
+  sendStopwatchDuration
+} from './stopwatchSlice';
 import { 
   exertionListValidate,
   exertionOptionList 
 } from '../../utils/parseUtils'
 
-const FinishDuration = () => {
+const Stopwatch = () => {
   const exertionList = useSelector(selectExertionList)
   const [formData, setFormData] = useState({
     exertionId: '',
@@ -49,7 +51,6 @@ const FinishDuration = () => {
 
   const onSubmit = async e => {
     e.preventDefault();
-    dispatch(updating());
     dispatch(
       operateFinishedDuration(formData)
     );
@@ -57,7 +58,7 @@ const FinishDuration = () => {
 
   return (
     <section>
-      <h2>Update Finished Duration</h2>
+      <h2>Stopwatch</h2>
       <form onSubmit={onSubmit}>
         <label htmlFor="exertionId">
           Choose Exertion:
@@ -72,43 +73,6 @@ const FinishDuration = () => {
           <option>Please select</option>
           {mainExertionOptions}
         </select>
-        <br/>
-        <label htmlFor="operationType">Add or Deduct?:</label>
-        <select
-         size="1"
-         id="operationType"
-         name="operationType"
-         value={operationType}
-         onChange={onChange}
-         required
-        >
-          <option key="addition" value="addition" >
-            Add
-          </option>
-          <option key="subtraction" value="subtraction">Deduct</option>
-        </select>
-        <br/>
-        <label htmlFor="payload">Number of Hours:</label>
-        <input
-          type="number"
-          min="1" max="20000"
-          id="payload"
-          name="payload"
-          value={payload}
-          onChange={onChange}
-          required
-        />
-        <br/>
-        {/* <label htmlFor="payloadMinutes">Number of Minutes:</label>
-        <input
-          type="number"
-          min="1" max="20000"
-          id="payloadMinutes"
-          name="payloadMinutes"
-          value={payloadMinutes}
-          onChange={onChange}
-        /> */}
-        <br/>
         <input type="submit" value="Finish" />
       </form>
     </section>
@@ -116,5 +80,10 @@ const FinishDuration = () => {
 }
 
 export default connect(
-  (state) => state.exertion
-)(FinishDuration);
+  (state) => {
+    return {
+      stopwatch: state.stopwatch,
+      exertion: state.exertion 
+    }
+  }
+)(Stopwatch);

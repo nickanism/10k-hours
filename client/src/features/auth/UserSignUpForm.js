@@ -49,7 +49,7 @@ const UserSignUpForm = () => {
   }
 
   return (
-    <section>
+    <section className="container">
       <h2>Sign Up</h2>
       <form onSubmit={onSubmit}>
         <label htmlFor="email">Email:</label>

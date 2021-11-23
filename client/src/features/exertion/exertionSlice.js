@@ -131,6 +131,24 @@ export const editExertion = (
   }
 }
 
+export const removeExertion = (exertionId) => async dispatch => {
+  try {
+    const res = await axios.delete(
+      `/api/exertion/${exertionId}`, 
+    );
+    if (res.status === 200) {
+      dispatch(fetchAllExertions());
+    } else {
+      alert(res.data);
+    }
+  } catch (err) {
+    const errors = err.response;
+    if (errors) {
+      console.error(errors);
+    }
+  }
+}
+
 export const operateFinishedDuration = (
   { exertionId, operationType, payload }) => async dispatch => {
   try {

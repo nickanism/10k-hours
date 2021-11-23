@@ -33,7 +33,7 @@ const EditExertionForm = () => {
     <>
       {
         exertionListValidate(exertionList) ?  
-        exertionOptionList(exertionList, exertionId)
+        exertionOptionList(exertionList)
         : null
       }
     </>

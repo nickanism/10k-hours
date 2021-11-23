@@ -25,15 +25,16 @@ const ExertionDisplay = () => {
   }, [dispatch])
 
   const exertionListDisplay = (
-    <div>
+    <section className="container">
       <h1> Your Exertions </h1>
       {
-        (exertionList && !loading) ? exertionUnorderedListParsing(exertionList) : 
+        (exertionList && !loading) ? 
+        <article>{exertionUnorderedListParsing(exertionList)}</article> : 
         <Spinner></Spinner>
       }
       <br />
-      total target hours: {totalTargetHoursLeft}
-    </div>
+      total target hours: <strong>{totalTargetHoursLeft}</strong>
+    </section>
   )
 
   return (

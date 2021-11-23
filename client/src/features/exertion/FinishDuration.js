@@ -32,7 +32,7 @@ const FinishDuration = () => {
     <>
       {
         exertionListValidate(exertionList) ?  
-        exertionOptionList(exertionList, exertionId)
+        exertionOptionList(exertionList)
         : null
       }
     </>
@@ -59,13 +59,11 @@ const FinishDuration = () => {
     <section>
       <h2>Update Finished Duration</h2>
       <form onSubmit={onSubmit}>
-        <label htmlFor="exertionId">
-          Choose Exertion:
-        </label>
         <select
           size="1"
           id="exertionId"
           name="exertionId"
+          placeholder="Choose Exertion"
           value={exertionId}
           onChange={onChange}
         > 
@@ -73,27 +71,29 @@ const FinishDuration = () => {
           {mainExertionOptions}
         </select>
         <br/>
-        <label htmlFor="operationType">Add or Deduct?:</label>
         <select
          size="1"
          id="operationType"
          name="operationType"
          value={operationType}
          onChange={onChange}
+         disabled={!exertionId}
          required
         >
           <option key="addition" value="addition" >
             Add
           </option>
-          <option key="subtraction" value="subtraction">Deduct</option>
+          <option key="subtraction" value="subtraction">
+            Deduct
+          </option>
         </select>
         <br/>
-        <label htmlFor="payload">Number of Hours:</label>
         <input
           type="number"
           min="1" max="20000"
           id="payload"
           name="payload"
+          placeholder="Number of Hours"
           value={payload}
           onChange={onChange}
           required

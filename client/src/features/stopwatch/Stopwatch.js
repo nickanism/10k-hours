@@ -4,78 +4,77 @@ import {
 } from 'react-redux';
 
 import { 
-  fetchAllExertions, selectExertionList, 
+  selectExertionList, 
   operateFinishedDuration
 } from '../exertion/exertionSlice';
 import {
-  sendStopwatchDuration
+  sendStopwatchDuration,
+  increateStopwatchValue,
+  selectValue,
+  selectIsRunning,
+  selectIsPaused,
+  startStopwatch, pause, reset
 } from './stopwatchSlice';
-import { 
-  exertionListValidate,
-  exertionOptionList 
-} from '../../utils/parseUtils'
 
 const Stopwatch = () => {
-  const exertionList = useSelector(selectExertionList)
-  const [formData, setFormData] = useState({
-    exertionId: '',
-    operationType: 'addition',
-    payload: ''
-  });
+  const stopwatchValue = useSelector(selectValue)
+  const stopwatchIsRunning = useSelector(selectIsRunning)
+  const stopwatchIsPaused = useSelector(selectIsPaused)
+
   const dispatch = useDispatch()
-
   useEffect(() => {
-    dispatch(fetchAllExertions())
-  }, [dispatch])
-  
-  let { exertionId, operationType, payload } = formData;
+    let interval = null;
+    if (stopwatchIsPaused) {
+      return clearInterval(interval);
+    }
+    if (stopwatchIsRunning) {
+      interval = setInterval(() => {
+        dispatch(increateStopwatchValue());
+      }, 1000);
+    } 
+    return function cleanup() {
+      clearInterval(interval);
+    }
+  }, [stopwatchValue, stopwatchIsRunning, stopwatchIsPaused])
 
-  const mainExertionOptions = (
-    <>
-      {
-        exertionListValidate(exertionList) ?  
-        exertionOptionList(exertionList, exertionId)
-        : null
-      }
-    </>
-  )  
-
-  const onChange = e => {
-    setFormData(
-      {
-        ...formData,
-        [e.target.name]: e.target.value
-      }
-    )
-  }
-
-  const onSubmit = async e => {
+  const onFinish = async e => {
     e.preventDefault();
-    dispatch(
-      operateFinishedDuration(formData)
-    );
+    dispatch(pause())
+    if (window.confirm(`Would you like to save the progress? ${stopwatchValue} seconds will be submitted as the finished progress.`)) {
+      window.alert("hell yeah")
+      // dispatch(
+      //   operateFinishedDuration()
+      // );
+      dispatch(reset())
+    } else {
+      window.alert("let's grind some more!")
+      dispatch(reset())
+    }
+    // dispatch(
+    //   operateFinishedDuration()
+    // );
   }
 
   return (
-    <section>
+    <article className="container">
+      <header>
       <h2>Stopwatch</h2>
-      <form onSubmit={onSubmit}>
-        <label htmlFor="exertionId">
-          Choose Exertion:
-        </label>
-        <select
-          size="1"
-          id="exertionId"
-          name="exertionId"
-          value={exertionId}
-          onChange={onChange}
-        > 
-          <option>Please select</option>
-          {mainExertionOptions}
-        </select>
-        <input type="submit" value="Finish" />
-      </form>
-    </section>
+      <h3>{stopwatchValue}</h3>
+      </header>
+        <br />
+        <div className="grid">
+        <button 
+          disabled={stopwatchIsRunning} 
+          onClick={() => {dispatch(startStopwatch())}}>START</button>
+        <button 
+          disabled={!stopwatchIsRunning || !stopwatchValue} 
+          onClick={() => {dispatch(pause())}}>
+            PAUSE
+        </button>
+        <button disabled={!stopwatchIsPaused} onClick={() => (dispatch(reset()))}>STOP & RESET</button>
+        <button disabled={!stopwatchValue} onClick={onFinish}>FINISH</button>
+        </div>
+    </article>
   );
 }
 

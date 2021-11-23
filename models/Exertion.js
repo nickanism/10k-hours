@@ -114,11 +114,17 @@ ExertionSchema.method(
     const exertion = this
     let childrenDeletion = "DELETE_SUCCESS";
     if (exertion.children.length) {
-      childrenDeletion = await this.children.map(async child => {
+      childrenDeletion = await this.children.forEach(async child => {
         try {
-          const subExertion 
-            = await Exertion.findById(child._id)
-          subExertion.deleteSubExertions()
+          const Exertion = require('./Exertion');
+          Exertion.findByIdAndRemove(
+            child._id,
+            function(err, doc) {
+              if (err) { childrenDeletion = "DELETE_FAILED" }
+              doc.deleteSubExertions()
+              childrenDeletion = "DELETE_SUCCESS"
+            }
+          )
         } catch (err) {
           childrenDeletion = "DELETE_FAILED"
         }

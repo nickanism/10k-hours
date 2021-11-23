@@ -51,9 +51,17 @@ export const exertionUnorderedListParsing = exertionList => {
         parsedList.map(exertion => {
           return (
             <li key={exertion.name}>
+              <hgroup>
               <h4>{exertion.name}</h4>
-              {exertion.targetDuration} <br />
-              {exertion.timeLeft}
+              <h5>{exertion.targetDuration} <br />
+                  {exertion.finishedDuration}
+              </h5>
+              <progress 
+                value={exertion.finishedDurationRaw}
+                max={exertion.targetDurationRaw}
+              >
+              </progress>
+              </hgroup>
               {exertionUnorderedListParsing(exertion.children)}
             </li>
           )
@@ -63,7 +71,7 @@ export const exertionUnorderedListParsing = exertionList => {
   )
 }
 
-export const exertionOptionList = (exertionList, selectedId = null) => {
+export const exertionOptionList = (exertionList) => {
   
   if (!exertionListValidate(exertionList)) {
     return null
@@ -83,7 +91,7 @@ export const exertionOptionList = (exertionList, selectedId = null) => {
             <option key={exertion.name} 
               value={exertion.id}
             >
-              {exertion.name}: {exertion.timeLeft}
+              {exertion.name}: ({exertion.timeLeft})
             </option>, 
             ...exertionOptionList(exertion.children)
         ]
@@ -93,7 +101,7 @@ export const exertionOptionList = (exertionList, selectedId = null) => {
           key={exertion.name} 
           value={exertion.id}
         >
-          {exertion.name}: {exertion.timeLeft}
+          {exertion.name}: ({exertion.timeLeft})
         </option>
       )
     })

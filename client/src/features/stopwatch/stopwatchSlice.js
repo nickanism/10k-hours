@@ -3,11 +3,6 @@ import axios from 'axios'
 
 import { fetchAllExertions } from '../exertion/exertionSlice';
 
-const modeEnum = {
-  GRIND: "grind",
-  REST: "rest"
-}
-
 export const pomodoroSlice = createSlice({
   name: 'stopwatch',
   initialState: {
@@ -16,7 +11,7 @@ export const pomodoroSlice = createSlice({
     isPaused: false,
   },
   reducers: {
-    startStopWatch: (state, action) => {
+    startStopwatch: (state, action) => {
       state.isPaused = false
       state.isRunning = true
     },
@@ -24,15 +19,13 @@ export const pomodoroSlice = createSlice({
       state.isRunning = false
       state.isPaused = true
     },
-    finish: (state) => {
-      state.value = 0
-      state.isRunning = true
-      state.isPaused = false
-    },
     reset: state => {
       state.value = 0
-      state.isRunning = true
+      state.isRunning = false
       state.isPaused = false
+    },
+    increateStopwatchValue: (state, action) => {
+      state.value++
     }
   }
 });
@@ -71,7 +64,7 @@ export const selectValue = state => state.stopwatch.value
 
 export const selectIsRunning = state => state.stopwatch.isRunning
 
-export const selectIsRunningPaused = state => state.stopwatch.isRunningPaused
+export const selectIsPaused = state => state.stopwatch.isPaused
 
 export const sendStopwatchDuration = (
   { exertionId, operationType, payload }) => async dispatch => {
@@ -105,7 +98,7 @@ export const sendStopwatchDuration = (
 
 export const { 
   reset, startStopwatch,
-  pause, finish
+  pause, increateStopwatchValue
 } = pomodoroSlice.actions
 
 export default pomodoroSlice.reducer

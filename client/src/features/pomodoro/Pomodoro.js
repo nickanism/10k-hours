@@ -76,7 +76,7 @@ const Pomodoro = () => {
   )
 
   const timeDisplay = (
-    <span style={{ fontSize: 40}}>
+    <span>
       &nbsp;
         <h2>
           {secondsToMinutes(timerCount)}
@@ -107,14 +107,18 @@ const Pomodoro = () => {
   )
 
   const timerIncrementButtons = (
-    <div stye={{ margin: 10 }}>
+    <div>
       <button
+        className="secondary"
+        disabled={isRunning}
         aria-label="Increment value"
         onClick={() => dispatch(incrementTimerBySecond())}
       >
         + 10 sec
       </button>
       <button
+        className="secondary"
+        disabled={isRunning}
         aria-label="Increment value"
         onClick={() => dispatch(incrementTimerByMinute())}
       >
@@ -123,8 +127,10 @@ const Pomodoro = () => {
     </div>
   )
   const timerDecrementButtons = (
-    <div stye={{ margin: 10 }}>
+    <div>
       <button
+        className="secondary"
+        disabled={isRunning}
         aria-label="Decrement value"
         onClick={() => dispatch(
             decrementTimerBySecond()
@@ -134,6 +140,8 @@ const Pomodoro = () => {
         - 10 sec
       </button>
       <button
+        className="secondary"
+        disabled={isRunning}
         aria-label="Decrement value"
         onClick={() => dispatch(
             decrementTimerByMinute()
@@ -146,21 +154,23 @@ const Pomodoro = () => {
   )
 
   return (
-    <div style={{ margin: 30}}>
+    <main class="container">
       <div>
         {isLoading ? <Spinner></Spinner> : exertionListDisplay}
         &nbsp;
-        {timerDecrementButtons}
-        &nbsp;
-        {timerIncrementButtons}
-        &nbsp;
+        <article>
         {modeDisplay}
         {timeDisplay}
-        <br/>
-        <br/>
+        <div className="grid">
+        {timerDecrementButtons}
+        <h2>Adjust Pomodoro</h2>
+        {timerIncrementButtons}
+        </div>
+        <div className="grid">
         {!isRunning ? startTimerButton : null}
         {isRunning ? pauseTimerButton : null}
         <button
+          disabled={!isRunning && isRunningPaused}
           onClick={() => dispatch(stop())}
         >
           STOP
@@ -170,8 +180,10 @@ const Pomodoro = () => {
         >
           RESET TO 25 MIN
         </button>
+        </div>
+        </article>
       </div>
-    </div>
+    </main>
   )
 }
 

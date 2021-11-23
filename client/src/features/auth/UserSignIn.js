@@ -49,22 +49,22 @@ const UserSignIn = () => {
   }
 
   return (
-    <section>
+    <section className="container">
       <h2>Sign In</h2>
       <form onSubmit={onSubmit}>
-        <label htmlFor="email">Email:</label>
         <input
           type="email"
           id="email"
           name="email"
+          placeholder="email"
           value={email}
           onChange={onChange}
         />
-        <label htmlFor="password">Password:</label>
         <input
           type="password"
           id="password"
           name="password"
+          placeholder="password"
           value={password}
           onChange={onChange}
         />

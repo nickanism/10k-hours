@@ -16,10 +16,9 @@ import PartExertionCreateForm from './features/exertion/PartExertionCreateForm';
 import ExertionDisplay from './features/exertion/ExertionDisplay';
 import EditExertionForm from './features/exertion/EditExertionForm';
 import FinishDuration from './features/exertion/FinishDuration';
+import RemoveExertion from './features/exertion/RemoveExertion';
 import Stopwatch from './features/stopwatch/Stopwatch';
 
-// Style
-import './App.css';
 import React from 'react';
 
 function App() {
@@ -63,6 +62,7 @@ function App() {
           <Route
             path="/exertions"
             element={
+              <section className="container">
               <PrivateRoute>
                 <ExertionDisplay></ExertionDisplay>
                 <Link to="create-main">
@@ -73,10 +73,15 @@ function App() {
                   Create Part Exertion
                 </Link>
                 <br />
+                <Link to="remove">
+                  Remove Exertion
+                </Link>
+                <br />
                 <Link to="finish-duration">
                   Edit Finish Duration
                 </Link>
               </PrivateRoute>
+              </section>
             }
           >
             <Route 
@@ -98,6 +103,12 @@ function App() {
               }
             />
             <Route 
+              path="remove"
+              element={
+                <RemoveExertion></RemoveExertion>
+              }
+            />
+            <Route 
               path="finish-duration"
               element={
                 <FinishDuration></FinishDuration>
@@ -108,7 +119,6 @@ function App() {
             path="/pomodoro"
             element={
               <PrivateRoute>
-                <h1>Pomodoro</h1>
                 <Pomodoro />
               </PrivateRoute>
             }

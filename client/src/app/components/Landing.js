@@ -43,13 +43,12 @@ export const Landing = () => {
   )
 
   return (
-    <div>
-      <h1>This is the landing page</h1>
-      { isAuthenticated ? goToDashboard : signUpSignIn }
+    <section className="container">
+      <h1>Landing Page</h1>
+      { isAuthenticated ? <h3>Welcome Back!</h3> : signUpSignIn }
       <img 
-        src={cookieThePom} alt="studying"
-        style={{ width: '100%', margin: 'auto', display: 'block' }} 
+        src={cookieThePom} alt="studying" 
       />
-    </div>
+    </section>
   )
 }

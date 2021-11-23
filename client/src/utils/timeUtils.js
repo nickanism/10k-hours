@@ -69,10 +69,17 @@ export const genericExertionListDisplay
       const { hours: targetHours, minutes: targetMinutes, seconds: targetSeconds }
         = durationToHMS(exertion.targetDuration)
 
+      const { hours: finishedHours, minutes: finishedMinutes, seconds: finishedSeconds }
+        = durationToHMS(exertion.finishedDuration)
+
       const arrayElement = {
         id: exertion._id,
         name: exertion.name, 
         skill: exertion.skill,
+        targetDurationRaw: exertion.targetDuration,
+        finishedDurationRaw: exertion.finishedDuration,
+        targetDurationLeft: exertion.targetDurationLeft,
+        finishedDuration: `Finished: ${prependZero(finishedHours)}:${prependZero(finishedMinutes)}:${prependZero(finishedSeconds)}`,
         targetDuration: `Goal: ${prependZero(targetHours)}:${prependZero(targetMinutes)}:${prependZero(targetSeconds)}`,
         timeLeft:`Left: ${prependZero(hours)}:${prependZero(minutes)}:${prependZero(seconds)}`
       }
@@ -87,4 +94,17 @@ export const genericExertionListDisplay
     }
   )
   return displayArray
+}
+
+export const findExertionDurationLeft = (parentExertionId, exertionList) => {
+  let durationLeft = null
+  for (const exertion of exertionList) {
+    if (exertion.id === parentExertionId) {
+      durationLeft = Math.floor(exertion.targetDurationLeft / 3600)
+    }
+    if (!durationLeft && exertion.children.length) {
+      durationLeft = findExertionDurationLeft(parentExertionId, exertion.children)
+    }
+  }
+  return durationLeft
 }

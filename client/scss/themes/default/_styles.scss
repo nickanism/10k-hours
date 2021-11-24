@@ -1,13 +1,12 @@
 // Custom Fonts
-@font-face {
-  font-family: 'Bevan';
-  src: url('./Bevan-Regular.ttf') format("opentype");
-}
+// Bevan and Bebas Neue
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bevan&family=Fira+Sans:wght@300;400;500&display=swap');
+
 
 // Commons Styles
 :root {
   // Typography
-  --font-family: system-ui, -apple-system, 'Bevan', "Segoe UI", "Roboto", "Ubuntu",
+  --font-family: 'Fira Sans', system-ui, -apple-system, 'Bevan', 'Bebas Neue', "Segoe UI", "Roboto", "Ubuntu",
     "Cantarell", "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol", "Noto Color Emoji";
   --line-height: 1.5;
@@ -129,8 +128,22 @@
 }
 
 // Link
+nav {
+  h1 {
+    --font-family: 'Bebas Neue';
+  }
+
+  ul {
+    font-family: 'Bebas Neue';
+  }
+}
+
+ul {
+  list-style: none;
+}
+
+
 a {
-  --font-family: 'Bevan', cursive;
   --text-decoration: none;
 
   // Secondary & Contrast
@@ -152,7 +165,6 @@ h3,
 h4,
 h5,
 h6 {
-  --font-family: 'Bevan', cursive;
   --font-weight: 700;
 }
 

@@ -72,3 +72,21 @@ aside {
     }
   }
 }
+
+
+// Custom Settings
+nav {
+  li {
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    input[type=checkbox][role=switch] {
+      position: relative;
+      left: 5px;
+      height: 1.2em;
+    }
+  }
+}
+

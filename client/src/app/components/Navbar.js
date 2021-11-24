@@ -1,24 +1,51 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  useDispatch, useSelector
+  connect, useDispatch, useSelector
 } from 'react-redux';
 
 import { 
-  selectIsAuthenticated, unloadUser  
+  selectIsAuthenticated, unloadUser,
+  selectDarkModeOn, toggleDarkMode
 } from '../../features/auth/authSlice';
 
-export const Navbar = () => {
+const Navbar = () => {
   const isAuthenticated 
     = useSelector(selectIsAuthenticated);
+  const darkModeOn = useSelector(selectDarkModeOn)
   const dispatch = useDispatch();
 
   const logout = () => dispatch(unloadUser())
+    if (darkModeOn) {
+      document.firstElementChild.dataset.theme = "dark"
+    } else {
+      document.firstElementChild.dataset.theme = "light"
+    }
+  useEffect(() => {
+
+  }, [darkModeOn])
+
+  const renderDarkModeSelection = e => {
+    dispatch(toggleDarkMode(!darkModeOn));
+  }
+
+  const darkModeSwitch = (
+    <li>
+      <label htmlFor="darkModeSwitch">dark mode</label>
+      <input 
+        type="checkbox" id="darkModeSwitch" placeholder="dark mode"
+        name="darkModeSwitch" role="switch" 
+        onChange={renderDarkModeSelection}
+      >
+      </input>
+    </li>
+)
 
   const guestLinks = (
     <ul>
       <li><Link to='/signin'>Sign In</Link></li>
       <li><Link to='/signup'>Sign Up</Link></li>
+      {darkModeSwitch}
     </ul>
   )
 
@@ -41,6 +68,7 @@ export const Navbar = () => {
             Logout
           </a>
         </li>
+        {darkModeSwitch}
       </ul>
   )
 
@@ -59,3 +87,7 @@ export const Navbar = () => {
     </nav>
   )
 }
+
+export default connect(
+  (state) => state.auth
+)(Navbar)

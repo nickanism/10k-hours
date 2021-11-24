@@ -8,6 +8,7 @@ import setAuthToken from '../../utils/setAuthToken'
 const initialState = {
   isAuthenticated: Boolean(localStorage.getItem('token')),
   loading: null,
+  darkModeOn: false,
   userBasicInfo: null
 }
 
@@ -39,6 +40,9 @@ const authSlice = createSlice({
       localStorage.removeItem('token')
       state.isAuthenticated = false
       state.loading = true
+    },
+    toggleDarkMode: (state, action) => {
+      state.darkModeOn = action.payload
     }
   }
 });
@@ -111,8 +115,11 @@ export const selectIsAuthenticated
 export const selectUserBasicInfo
   = state => state.auth.userBasicInfo;
 
+export const selectDarkModeOn
+  = state => state.auth.darkModeOn;
+
 export const { register, loadUser, 
-  login, unloadUser, loadUserBasicInfo
+  login, unloadUser, loadUserBasicInfo, toggleDarkMode
 } = authSlice.actions;
 
 export default authSlice.reducer;

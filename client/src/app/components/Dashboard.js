@@ -36,11 +36,11 @@ export const Dashboard = () => {
 
   const totalProgressBar = (
     <>
-      <label forHtml="finishedHoursProgress">
+      <label forttml="finishedHoursProgress">
         <hgroup>
         {
           !loading ? 
-          <h4>total progress: {totalFinishedHours} / {totalTargetHours} (hours) </h4> :
+          <h4>total progress: {totalFinishedHours} / {totalTargetHours} hours </h4> :
           <h4>loading...</h4>
         }
         {!loading ? <h5>{totalTargetHoursLeft} more hours to go</h5> : 
@@ -58,11 +58,11 @@ export const Dashboard = () => {
   const showUserBasicInfo = (
     <>
       <hgroup>
-        <h4>{!loading ? (<>{userBasicInfo.email}</>) : null}</h4>
+        <h4>{!loading && userBasicInfo ? (<>{userBasicInfo.email}</>) : null}</h4>
         <h5>
           {
-            !loading ? 
-            (userBasicInfo.level === 0 && "no level") : null
+            !loading && userBasicInfo ? 
+            `level ${userBasicInfo.level}` : null
           }
         </h5>
       </hgroup>

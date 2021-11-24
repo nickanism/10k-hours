@@ -4,7 +4,8 @@ import {
 } from 'react-redux';
 
 import { 
-  selectExertionList
+  selectExertionList,
+  fetchAllExertions
 } from '../exertion/exertionSlice';
 import { 
   exertionListValidate,
@@ -27,6 +28,11 @@ const Stopwatch = () => {
   const [exertionId, setExertionId] = useState()
 
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchAllExertions())
+  }, [])
+
   useEffect(() => {
     let interval = null;
     if (stopwatchIsPaused) {
@@ -40,7 +46,7 @@ const Stopwatch = () => {
     return function cleanup() {
       clearInterval(interval);
     }
-  }, [stopwatchValue, stopwatchIsRunning, stopwatchIsPaused])
+  }, [dispatch, stopwatchValue, stopwatchIsRunning, stopwatchIsPaused])
 
   const mainExertionOptions = (
     <>
@@ -73,11 +79,13 @@ const Stopwatch = () => {
 
   return (
     <article className="container">
-      <header>
-      <h2>Stopwatch</h2>
-      <h3>{stopwatchValue}</h3>
+      <header className="stopwatchBoard">
+        <h2>Stopwatch</h2>
+        
       </header>
-      <select
+      <h3>{stopwatchValue}</h3>
+      <section className="stopwatchExertionSelection">
+        <select
           size="1"
           id="exertionId"
           name="exertionId"
@@ -89,18 +97,23 @@ const Stopwatch = () => {
           {mainExertionOptions}
         </select>
         <br />
+      </section>
+      <footer>
         <div className="grid">
-        <button 
-          disabled={stopwatchIsRunning} 
-          onClick={() => {dispatch(startStopwatch())}}>START</button>
-        <button 
-          disabled={!stopwatchIsRunning || !stopwatchValue} 
-          onClick={() => {dispatch(pause())}}>
-            PAUSE
-        </button>
-        <button disabled={!stopwatchIsPaused} onClick={() => (dispatch(reset()))}>STOP & RESET</button>
-        <button disabled={!stopwatchValue} onClick={onFinish}>FINISH</button>
+          &nbsp;
+          <button 
+            disabled={stopwatchIsRunning} 
+            onClick={() => {dispatch(startStopwatch())}}>START</button>
+          <button 
+            disabled={!stopwatchIsRunning || !stopwatchValue} 
+            onClick={() => {dispatch(pause())}}>
+              PAUSE
+          </button>
+          <button disabled={!stopwatchIsPaused} onClick={() => (dispatch(reset()))}>STOP & RESET</button>
+          <button disabled={!stopwatchValue} onClick={onFinish}>FINISH</button>
+          &nbsp;
         </div>
+      </footer>
     </article>
   );
 }

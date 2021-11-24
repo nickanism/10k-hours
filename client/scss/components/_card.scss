@@ -31,3 +31,46 @@ article {
     border-top: var(--border-width) solid var(--card-border-color);
   }
 }
+
+
+// Custom settings in <article>
+
+.pomodoroTimerDisplay {
+  text-align: center;
+  margin: auto;
+  
+}
+
+.pomodoroAdjustSignpost {
+  margin: auto;
+
+  p {
+    font-family: Helvetica, sans-serif;
+    color: #5c707b;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: auto;
+  }
+
+}
+
+.stopwatchBoard {
+  text-align: center;
+}
+
+.stopwatchBoard + h3 {
+  text-align: center;
+}
+
+.stopwatchExertionSelection {
+  margin: auto;
+  width: 80%;
+}
+
+.exertionDisplayHeader {
+  margin: auto;
+  h1 {
+    text-align: center;
+    font-family: 'Fira Sans', sans-serif;
+  }
+}

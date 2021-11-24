@@ -5,7 +5,7 @@ import {
   Link
 } from 'react-router-dom'
 
-import { Navbar } from './app/components/Navbar'
+import Navbar from './app/components/Navbar'
 import { Landing } from './app/components/Landing'
 import { Dashboard } from './app/components/Dashboard'
 import PrivateRoute from'./app/routing/PrivateRoute'

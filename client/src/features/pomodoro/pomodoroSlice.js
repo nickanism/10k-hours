@@ -17,8 +17,8 @@ export const pomodoroSlice = createSlice({
     value: null,
     isRunning: false,
     isRunningPaused: false,
-    startRunningValue: 10,
-    startRestingValue: 10,
+    startRunningValue: 1500,
+    startRestingValue: 300,
     exertionList: null,
     loading: true
   },

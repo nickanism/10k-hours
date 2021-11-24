@@ -26,7 +26,10 @@ const ExertionDisplay = () => {
 
   const exertionListDisplay = (
     <section className="container">
-      <h1> Your Exertions </h1>
+      <div className="exertionDisplayHeader">
+        <h1></h1>
+        <h1> Your Exertions </h1>
+      </div>
       {
         (exertionList && !loading) ? 
         <article>{exertionUnorderedListParsing(exertionList)}</article> : 

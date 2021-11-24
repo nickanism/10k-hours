@@ -1,4 +1,5 @@
 import fantasy_fairy from "../static/fantasy_fairy.mp3";
+import uplight_flute_noti from "../static/uplifting-flute-notification.mp3";
 
 const prependZero = n => {
   n = String(n)
@@ -8,7 +9,7 @@ const prependZero = n => {
 }
 
 export const playSound = () => {
-  const audio = new Audio(fantasy_fairy)
+  const audio = new Audio(uplight_flute_noti)
   audio.play()
 }
 

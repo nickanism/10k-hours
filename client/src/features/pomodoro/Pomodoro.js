@@ -7,8 +7,6 @@ import { connect,
 
 import Spinner from '../../app/components/Spinner';
 import {
-  selectLoading,
-  fetchAllExertions,
   selectMode,
   decrementTimerBySecond,incrementTimerBySecond,
   incrementTimerByMinute, decrementTimerByMinute,
@@ -19,8 +17,13 @@ import {
   startTimer,
   stop, 
   selectIsRunning, selectIsRunningPaused,
-  selectPomodoroTime, selectExertionList
+  selectPomodoroTime
 } from './pomodoroSlice';
+import { 
+  selectExertionList, 
+  fetchAllExertions,
+  selectLoading
+} from '../exertion/exertionSlice'
 import {
   secondsToMinutes, playSound
 } from '../../utils/timeUtils';
@@ -39,7 +42,7 @@ const Pomodoro = () => {
 
   useEffect(() => {
     dispatch(fetchAllExertions())
-  }, [dispatch])
+  }, [])
 
   useEffect(() => {
     let interval = null;
@@ -69,20 +72,16 @@ const Pomodoro = () => {
 
   const modeDisplay = (
     <div>
-      <h2>
+      <h3>
         {timerMode.toUpperCase()}
-      </h2>
+      </h3>
     </div>
   )
 
   const timeDisplay = (
-    <span>
-      &nbsp;
-        <h2>
-          {secondsToMinutes(timerCount)}
-        </h2>
-      &nbsp;
-    </span>
+    <h1>
+      {secondsToMinutes(timerCount)}
+    </h1>
   )
 
   const startTimerButton = (
@@ -154,33 +153,38 @@ const Pomodoro = () => {
   )
 
   return (
-    <main class="container">
+    <main className="container">
       <div>
-        {isLoading ? <Spinner></Spinner> : exertionListDisplay}
-        &nbsp;
         <article>
-        {modeDisplay}
-        {timeDisplay}
-        <div className="grid">
-        {timerDecrementButtons}
-        <h2>Adjust Pomodoro</h2>
-        {timerIncrementButtons}
-        </div>
-        <div className="grid">
-        {!isRunning ? startTimerButton : null}
-        {isRunning ? pauseTimerButton : null}
-        <button
-          disabled={!isRunning && isRunningPaused}
-          onClick={() => dispatch(stop())}
-        >
-          STOP
-        </button>
-        <button
-          onClick={() => dispatch(reset())}
-        >
-          RESET TO 25 MIN
-        </button>
-        </div>
+          <div className="pomodoroTimerDisplay">
+            {modeDisplay}
+            {timeDisplay}
+          </div>
+          <div className="grid">
+            {timerDecrementButtons}
+            <div className="pomodoroAdjustSignpost">
+              <p>Adjust Pomodoro</p>
+            </div>
+            {timerIncrementButtons}
+          </div>
+          <div className="grid">
+            {!isRunning ? startTimerButton : null}
+            {isRunning ? pauseTimerButton : null}
+            <button
+              disabled={!isRunning && isRunningPaused}
+              onClick={() => dispatch(stop())}
+            >
+              STOP
+            </button>
+            <button
+              onClick={() => dispatch(reset())}
+            >
+              RESET TO 25 MIN
+            </button>
+          </div>
+        </article>
+        <article>
+        {isLoading ? <Spinner></Spinner> : exertionListDisplay}
         </article>
       </div>
     </main>
@@ -188,5 +192,10 @@ const Pomodoro = () => {
 }
 
 export default connect(
-  (state) => state.pomodoro
+  (state) => {
+    return {
+      pomodoro: state.pomodoro,
+      exertion: state.exertion
+    }
+  }
 )(Pomodoro);

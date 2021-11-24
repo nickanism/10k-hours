@@ -11,7 +11,9 @@ import {
 const initialState = {
   loading: true,
   exertionList: null,
-  totalTargetHoursLeft: null
+  totalTargetHoursLeft: null,
+  totalFinishedHours: null,
+  totalTargetHours: null
 }
 
 const exertionSlice = createSlice({
@@ -33,6 +35,12 @@ const exertionSlice = createSlice({
     },
     loadTotalTargetHoursLeft: (state, action) => {
       state.totalTargetHoursLeft = action.payload
+    },
+    loadTotalTargetHours: (state, action) => {
+      state.totalTargetHours = action.payload
+    },
+    loadTotalFinishedHours: (state, action) => {
+      state.totalFinishedHours = action.payload
     },
     createMainExertion: (state, action) => {
       // some action
@@ -189,6 +197,8 @@ export const fetchAllExertions = () => async dispatch => {
       = genericExertionListDisplay(res.data.exertions)
     dispatch(loadExertionList(exertionDisplay))
     dispatch(loadTotalTargetHoursLeft(res.data.totalTargetHoursLeft))
+    dispatch(loadTotalTargetHours(res.data.totalTargetHours))
+    dispatch(loadTotalFinishedHours(res.data.totalFinishedHours))
   } catch (err) {
     console.error(err)
   }
@@ -200,9 +210,14 @@ export const selectLoading = state => state.exertion.loading
 
 export const selectTotalTargetHoursLeft = state => state.exertion.totalTargetHoursLeft
 
+export const selectTotalTargetHours = state => state.exertion.totalTargetHours
+
+export const selectTotalFinishedHours = state => state.exertion.totalFinishedHours
+
 export const { 
   createMainExertion, updating,
-  loadExertionList, loadTotalTargetHoursLeft
+  loadExertionList, loadTotalTargetHoursLeft, loadTotalFinishedHours,
+  loadTotalTargetHours
 } = exertionSlice.actions;
 
 export default exertionSlice.reducer;

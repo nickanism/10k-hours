@@ -7,6 +7,7 @@ import {
 
 import { Navbar } from './app/components/Navbar'
 import { Landing } from './app/components/Landing'
+import { Dashboard } from './app/components/Dashboard'
 import PrivateRoute from'./app/routing/PrivateRoute'
 import Pomodoro from './features/pomodoro/Pomodoro'
 import UserSignUpForm from './features/auth/UserSignUpForm'
@@ -55,7 +56,7 @@ function App() {
             path="/dashboard"
             element={
               <PrivateRoute>
-                <h1>Super Private DashBoard</h1>
+                <Dashboard></Dashboard>
               </PrivateRoute>
             }
           />

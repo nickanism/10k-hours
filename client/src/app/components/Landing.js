@@ -5,6 +5,7 @@ import {
 } from 'react-redux';
 
 import cookieThePom from '../../static/cookie-the-pom.jpg';
+import corgiStudying from '../../static/corgi_studying_masters.jpeg';
 import { 
   selectIsAuthenticated  
 } from '../../features/auth/authSlice';
@@ -47,7 +48,7 @@ export const Landing = () => {
       <h1>Landing Page</h1>
       { isAuthenticated ? <h3>Welcome Back!</h3> : signUpSignIn }
       <img 
-        src={cookieThePom} alt="studying" 
+        src={corgiStudying} alt="studying" 
       />
     </section>
   )

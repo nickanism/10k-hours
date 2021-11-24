@@ -49,12 +49,21 @@ router.get(
     const totalTargetHoursLeft 
       = await user.totalTargetHoursLeft;
     
+    const totalTargetDuration = await user.totalTargetDuration
+    const totalTargetHours = secToHour(totalTargetDuration)
+    const totalFinishedDuration = await user.totalFinishedDuration
+    const totalFinishedHours = secToHour(totalFinishedDuration)
+    
     // simplify the data
     exertions = mainExertionResponse(exertions)
 
     return res.status(200).json({ 
       exertions: exertions,
-      totalTargetHoursLeft: totalTargetHoursLeft
+      totalTargetHoursLeft,
+      totalFinishedDuration,
+      totalFinishedHours,
+      totalTargetDuration, 
+      totalTargetHours
     })
   }
 )

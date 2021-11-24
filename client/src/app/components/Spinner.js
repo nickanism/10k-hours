@@ -10,7 +10,7 @@ const Spinner = () => {
   //     />
   //   </>
   // )
-  return <article aria-busy="true">fetching your exertion list...</article>
+  return <article aria-busy="true">fetching the required info...</article>
 }
 
 export default Spinner

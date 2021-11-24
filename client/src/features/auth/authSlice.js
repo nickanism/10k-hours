@@ -6,7 +6,9 @@ import axios from 'axios';
 import setAuthToken from '../../utils/setAuthToken'
 
 const initialState = {
-  isAuthenticated: Boolean(localStorage.getItem('token'))
+  isAuthenticated: Boolean(localStorage.getItem('token')),
+  loading: null,
+  userBasicInfo: null
 }
 
 initialState.loading = !initialState.isAuthenticated
@@ -29,6 +31,9 @@ const authSlice = createSlice({
       setAuthToken(localStorage.token)
       state.isAuthenticated = true
       state.loading = false
+    },
+    loadUserBasicInfo: (state, action) => {
+      state.userBasicInfo = action.payload
     },
     unloadUser: (state, action) => {
       localStorage.removeItem('token')
@@ -91,11 +96,23 @@ export const signinUser = ({ email, password }) => async dispatch => {
   }
 }
 
+export const fetchUserInfo = () => async dispatch => {
+  const res = await axios.get('api/auth')
+  if (res.status === 200) {
+    dispatch(loadUserBasicInfo(res.data));
+  } else {
+    alert(res.data)
+  }
+}
+
 export const selectIsAuthenticated 
   = state => state.auth.isAuthenticated;
 
+export const selectUserBasicInfo
+  = state => state.auth.userBasicInfo;
+
 export const { register, loadUser, 
-  login, unloadUser 
+  login, unloadUser, loadUserBasicInfo
 } = authSlice.actions;
 
 export default authSlice.reducer;

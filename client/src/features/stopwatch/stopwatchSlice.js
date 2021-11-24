@@ -66,14 +66,14 @@ export const selectIsRunning = state => state.stopwatch.isRunning
 
 export const selectIsPaused = state => state.stopwatch.isPaused
 
-export const sendStopwatchDuration = (
-  { exertionId, operationType, payload }) => async dispatch => {
+export const sendStopwatchDuration = (exertionId, payload) => async dispatch => {
   try {
     const config = {
       headers: {
         'Content-Type': 'application/json'
       }
     }
+    const operationType = "addition"
     const body 
       = JSON.stringify({ 
         operationType, payload

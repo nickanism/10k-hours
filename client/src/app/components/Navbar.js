@@ -25,19 +25,19 @@ export const Navbar = () => {
   const authLinks = (
       <ul>
         <li>
-          <Link role="button" className="secondary" to='/dashboard'>Dashboard</Link>
+          <Link to='/dashboard'>Dashboard</Link>
         </li>
         <li>
-          <Link role="button" className="secondary" to='/exertions'>Exertions</Link>
+          <Link to='/exertions'>Exertions</Link>
         </li>
         <li>
-          <Link role="button" className="secondary" to='/pomodoro'>Pomodoro</Link>
+          <Link to='/pomodoro'>Pomodoro</Link>
         </li>
         <li>
-          <Link role="button" className="secondary" to='/stopwatch'>Stopwatch</Link>
+          <Link to='/stopwatch'>Stopwatch</Link>
         </li>
         <li>
-          <a role="button" className="secondary" onClick={logout} href='/signin'>
+          <a onClick={logout} href='/signin'>
             Logout
           </a>
         </li>
@@ -45,7 +45,7 @@ export const Navbar = () => {
   )
 
   return (
-    <nav className="navbar container">
+    <nav className="container">
       <ul>
         <li>
         <h1>

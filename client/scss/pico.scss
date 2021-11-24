@@ -7,11 +7,11 @@
 @import "variables";
 
 // Theming
-@import "themes/default";
+@import "themes/default.scss";
 
 // Layout
 @import "layout/document"; // html
-@import "layout/sectioning"; // body, header, main, footer
+@import "layout/sectioning.scss"; // body, header, main, footer
 @import "layout/container"; // .container, .container-fluid
 @import "layout/section"; // section
 @import "layout/grid"; // .grid
@@ -30,8 +30,8 @@
 
 // Components
 @import "components/accordion"; // details, summary
-@import "components/card"; // article
-@import "components/nav"; // nav
+@import "components/card.scss"; // article
+@import "components/nav.scss"; // nav
 @import "components/progress"; // progress
 
 // Utilities

@@ -62,7 +62,13 @@ UserSchema.virtual('allExertions')
                 populate: {
                   path: 'children',
                   populate: {
-                    path: 'children'
+                    path: 'children',
+                    populate: {
+                      path: 'children',
+                      populate: {
+                        path: 'children'
+                      }
+                    }
                   }
                 }
               }
@@ -81,6 +87,29 @@ UserSchema.virtual('totalTargetHoursLeft')
       total = mainExertions
         .filter(exertion => !exertion.parent)
         .map(exertion => exertion.targetHoursLeft)
+        .reduce((acc, curr) => (acc + curr), 0)
+      return total
+    }
+  );
+  UserSchema.virtual('totalTargetDuration')
+  .get(
+    async function() { 
+      const mainExertions = await this.mainExertions
+      total = mainExertions
+        .filter(exertion => !exertion.parent)
+        .map(exertion => exertion.targetDuration)
+        .reduce((acc, curr) => (acc + curr), 0)
+      return total
+    }
+  );
+  
+  UserSchema.virtual('totalFinishedDuration')
+  .get(
+    async function() { 
+      const mainExertions = await this.mainExertions
+      total = mainExertions
+        .filter(exertion => !exertion.parent)
+        .map(exertion => exertion.finishedDuration)
         .reduce((acc, curr) => (acc + curr), 0)
       return total
     }

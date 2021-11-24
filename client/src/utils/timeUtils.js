@@ -80,9 +80,9 @@ export const genericExertionListDisplay
         targetDurationRaw: exertion.targetDuration,
         finishedDurationRaw: exertion.finishedDuration,
         targetDurationLeft: exertion.targetDurationLeft,
-        finishedDuration: `Finished: ${prependZero(finishedHours)}:${prependZero(finishedMinutes)}:${prependZero(finishedSeconds)}`,
-        targetDuration: `Goal: ${prependZero(targetHours)}:${prependZero(targetMinutes)}:${prependZero(targetSeconds)}`,
-        timeLeft:`Left: ${prependZero(hours)}:${prependZero(minutes)}:${prependZero(seconds)}`
+        finishedDuration: `finished: ${prependZero(finishedHours)}:${prependZero(finishedMinutes)}:${prependZero(finishedSeconds)}`,
+        targetDuration: `goal: ${prependZero(targetHours)}:${prependZero(targetMinutes)}:${prependZero(targetSeconds)}`,
+        timeLeft:`remaining: ${prependZero(hours)}:${prependZero(minutes)}:${prependZero(seconds)}`
       }
 
       let children

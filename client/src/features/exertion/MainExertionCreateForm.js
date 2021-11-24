@@ -31,7 +31,7 @@ const MainExertionCreateForm = () => {
   }
 
   return (
-    <section>
+    <article>
       <h2>Create Main Exertion</h2>
       <form onSubmit={onSubmit}>
         <label htmlFor="name">Exertion Name:</label>
@@ -64,7 +64,7 @@ const MainExertionCreateForm = () => {
         <br/>
         <input type="submit" value="Create Exertion" />
       </form>
-    </section>
+    </article>
   );
 }
 

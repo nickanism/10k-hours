@@ -9,8 +9,23 @@ nav ul {
   
 }
 
+:root:not([data-theme="dark"]) {
+  nav {
+    background-color: $primary-200;
+  }
+}
+
+:root:not([data-theme="light"]) {
+  nav {
+    background-color: #{mix($black, $grey-900, 37.5%)};
+  }
+}
+
 nav {
+  
   justify-content: space-between;
+  position: fixed;
+  top: 0;
 
   ol,
   ul {
@@ -90,3 +105,6 @@ nav {
   }
 }
 
+.main {
+  margin-top: 110px;
+}

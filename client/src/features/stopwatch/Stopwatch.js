@@ -83,7 +83,7 @@ const Stopwatch = () => {
         <h2>Stopwatch</h2>
         
       </header>
-      <h3>{stopwatchValue}</h3>
+      <h2>{stopwatchValue}</h2>
       <section className="stopwatchExertionSelection">
         <select
           size="1"
@@ -96,7 +96,6 @@ const Stopwatch = () => {
           <option>Please select</option>
           {mainExertionOptions}
         </select>
-        <br />
       </section>
       <footer>
         <div className="grid">

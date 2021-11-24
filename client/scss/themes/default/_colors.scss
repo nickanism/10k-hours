@@ -24,14 +24,19 @@ $grey-900: hsl($grey-hue, 30%, 15%) !default;
 // $primary-800: hsl($primary-hue, 95%, 23%) !default;
 // $primary-900: hsl($primary-hue, 100%, 15%) !default;
 
-// Custom Orange version
+// Custom Purple version (Avid Media Composer)
+$primary-200: #F2EBFC !default;
+$primary-300: #B890F0 !default;
+$primary-400: #AE88E3 !default;
 $primary-500: #AA68F5 !default;
 $primary-600: #7726E6 !default;
 $primary-700: #7712A3 !default;
+$primary-800: #410299 !default;
 
 // Black & White
-$black: #000 !default;
-$white: #fff !default;
+$black: #1C1624 !default;
+// $white: #fff !default;
+$white: #F4EFFB !default;
 
 // Amber
 $amber-50: #fff8e1 !default;

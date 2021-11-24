@@ -73,7 +73,7 @@ const Navbar = () => {
   )
 
   return (
-    <nav className="container">
+    <nav className="container-fluid">
       <ul>
         <li>
         <h1>

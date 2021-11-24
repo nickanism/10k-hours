@@ -26,7 +26,7 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <div>
+      <div className="main">
         <Routes>
           <Route
             path="/"
@@ -79,7 +79,7 @@ function App() {
                 </Link>
                 <br />
                 <Link to="finish-duration">
-                  Edit Finish Duration
+                  Edit Finished Duration
                 </Link>
               </PrivateRoute>
               </section>

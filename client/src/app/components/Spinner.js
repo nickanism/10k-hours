@@ -10,7 +10,13 @@ const Spinner = () => {
   //     />
   //   </>
   // )
-  return <article aria-busy="true">fetching the required info...</article>
+  return (
+    <article>
+      <h3 aria-busy="true">
+      fetching the required info...
+      </h3>
+    </article>
+  )
 }
 
 export default Spinner

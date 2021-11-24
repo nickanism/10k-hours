@@ -53,9 +53,9 @@ export const exertionUnorderedListParsing = exertionList => {
             <li key={exertion.name}>
               <hgroup>
               <h4>{exertion.name}</h4>
-              <h5>{exertion.targetDuration} <br />
+              <p>{exertion.targetDuration} <br />
                   {exertion.finishedDuration}
-              </h5>
+              </p>
               <progress 
                 value={exertion.finishedDurationRaw}
                 max={exertion.targetDurationRaw}

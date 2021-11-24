@@ -19,17 +19,14 @@ export const Landing = () => {
       <h2>
         You can create your exertion by signing up!
       </h2>
-      <button>
-        <Link to='/signup'>
+      <div className="container grid">
+        <Link role="button" className="outline" to='/signup'>
           Sign Up
         </Link>
-      </button>
-      &nbsp;
-      <button>
-        <Link to='/signin'>
+        <Link role="button" className="outline" to='/signin'>
           Sign In
         </Link>
-      </button>
+      </div>
     </section>
   )
 

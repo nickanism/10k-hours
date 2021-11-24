@@ -58,7 +58,7 @@ article {
   text-align: center;
 }
 
-.stopwatchBoard + h3 {
+.stopwatchBoard + h2, h3 {
   text-align: center;
 }
 
@@ -74,3 +74,15 @@ article {
     font-family: 'Fira Sans', sans-serif;
   }
 }
+
+
+// custom set up for <section>
+
+section.container {
+  img, h1, h2, h3 {
+    text-align: center;
+    display: block;
+    margin: auto;
+  }
+  justify-content: space-between;
+} 

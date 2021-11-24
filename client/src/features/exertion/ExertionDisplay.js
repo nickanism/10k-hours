@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { 
   connect, useDispatch, useSelector
 } from 'react-redux';
-import { Outlet } from 'react-router-dom'
+import { Outlet, Link } from 'react-router-dom'
 
 import { 
   selectExertionList, selectTotalTargetHoursLeft,
@@ -24,19 +24,34 @@ const ExertionDisplay = () => {
     dispatch(fetchAllExertions())
   }, [dispatch])
 
+  const reportEmptyExertionList = (
+      <hgroup>
+        <h3>There is no exertion</h3>
+        <h3>You can create a new exertion <Link to="create-main">here</Link></h3>
+      </hgroup>
+  )
+
+  const totalTargetHoursDisplay = (
+    <>total target hours: <strong>{totalTargetHoursLeft}</strong></>
+  )
+
   const exertionListDisplay = (
     <section className="container">
       <div className="exertionDisplayHeader">
-        <h1></h1>
         <h1> Your Exertions </h1>
       </div>
       {
         (exertionList && !loading) ? 
-        <article>{exertionUnorderedListParsing(exertionList)}</article> : 
+        <article>
+          {
+            exertionList.length ? 
+            exertionUnorderedListParsing(exertionList) :
+            reportEmptyExertionList
+          }
+          {(exertionList && !loading) ? totalTargetHoursDisplay : null}
+        </article> : 
         <Spinner></Spinner>
       }
-      <br />
-      total target hours: <strong>{totalTargetHoursLeft}</strong>
     </section>
   )
 

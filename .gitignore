@@ -1,12 +1,3 @@
 node_modules/
 config/default.json
 config/production.json
-
-
-client/.env.development
-client/.env.production
-client/.env
-
-.env
-.env.development
-.env.production

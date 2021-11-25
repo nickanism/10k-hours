@@ -78,6 +78,10 @@ function App() {
                   Remove Exertion
                 </Link>
                 <br />
+                <Link to="edit">
+                  Edit Exertion Target Hours
+                </Link>
+                <br />
                 <Link to="finish-duration">
                   Edit Finished Duration
                 </Link>

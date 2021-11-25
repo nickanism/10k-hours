@@ -1,5 +1,5 @@
 import React, {
-  useEffect
+  useEffect, useState
 } from 'react'
 import { connect, 
   useSelector, useDispatch 
@@ -10,14 +10,14 @@ import {
   selectMode,
   decrementTimerBySecond,incrementTimerBySecond,
   incrementTimerByMinute, decrementTimerByMinute,
-  finish, 
+  finish, finishDuration,
   reset,
   pause,
   deductSecond,
   startTimer,
   stop, 
   selectIsRunning, selectIsRunningPaused,
-  selectPomodoroTime
+  selectPomodoroTime, selectStartRunningValue
 } from './pomodoroSlice';
 import { 
   selectExertionList, 
@@ -28,7 +28,9 @@ import {
   secondsToMinutes, playSound
 } from '../../utils/timeUtils';
 import { 
-  exertionUnorderedListParsing 
+  exertionUnorderedListParsing,
+  exertionListValidate,
+  exertionOptionList  
 } from '../../utils/parseUtils'
 
 const Pomodoro = () => {
@@ -38,6 +40,8 @@ const Pomodoro = () => {
   const isRunning = useSelector(selectIsRunning);
   const isRunningPaused = useSelector(selectIsRunningPaused)
   const exertionList = useSelector(selectExertionList)
+  const startRunningValue = useSelector(selectStartRunningValue)
+  const [exertionId, setExertionId] = useState()
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -55,14 +59,29 @@ const Pomodoro = () => {
       }, 1000);
     } else if (!isRunning && timerCount !== 0) {
       clearInterval(interval);
-    } else if (isRunning && timerCount === 0) {
+    } else if (isRunning && timerCount === 0 && timerMode === "grind") {
       playSound();
+      dispatch(finishDuration({exertionId, startRunningValue}))
       dispatch(finish())
     }
     return function cleanup() {
       clearInterval(interval);
     }
   }, [dispatch, timerMode, isRunning, isRunningPaused, timerCount]);
+
+  const mainExertionOptions = (
+    <>
+      {
+        exertionListValidate(exertionList) ?  
+        exertionOptionList(exertionList)
+        : null
+      }
+    </>
+  )
+
+  const onChange = e => {
+    setExertionId(e.target.value)
+  }
 
   const exertionListDisplay = (
     <div>
@@ -87,6 +106,7 @@ const Pomodoro = () => {
   const startTimerButton = (
     <div>
       <button
+        disabled={!exertionId}
         onClick={() => dispatch(startTimer())}
       >
         {timerMode === "grind" ? "START GRIND" : 
@@ -156,6 +176,17 @@ const Pomodoro = () => {
     <main className="container">
       <div>
         <article>
+          <select
+            size="1"
+            id="exertionId"
+            name="exertionId"
+            placeholder="Choose Exertion"
+            value={exertionId}
+            onChange={onChange}
+          > 
+            <option>Please select</option>
+            {mainExertionOptions}
+          </select>
           <div className="pomodoroTimerDisplay">
             {modeDisplay}
             {timeDisplay}
@@ -171,7 +202,7 @@ const Pomodoro = () => {
             {!isRunning ? startTimerButton : null}
             {isRunning ? pauseTimerButton : null}
             <button
-              disabled={!isRunning && isRunningPaused}
+              disabled={(!isRunning && isRunningPaused) || !exertionId}
               onClick={() => dispatch(stop())}
             >
               STOP

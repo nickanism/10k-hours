@@ -17,8 +17,8 @@ export const pomodoroSlice = createSlice({
     value: null,
     isRunning: false,
     isRunningPaused: false,
-    startRunningValue: 1500,
-    startRestingValue: 300,
+    startRunningValue: 15,
+    startRestingValue: 10,
     exertionList: null,
     loading: true
   },
@@ -111,21 +111,25 @@ export const fetchAllExertions = () => async dispatch => {
 }
 
 
-export const finishDuration = ({ email, password }) => async dispatch => {
+export const finishDuration = ({ exertionId, startRunningValue }) => async dispatch => {
   try {
+    console.log("here")
     const config = {
       headers: {
         'Content-Type': 'application/json'
       }
     }
-    const exertionId = ''
-    const body = JSON.stringify({ email, password });
-    const res = await axios.post(
-      `/api/exertion/${exertionId}/finish`, 
+    const operation = "addition"
+    const payload = startRunningValue
+    const body = JSON.stringify({ operation, payload });
+    console.log(body)
+    const res = await axios.put(
+      `/api/exertion/${exertionId}/operate-finished-duration`, 
       body,
       config
     );
     if (res.status === 200) {
+      console.log(res.data)
       /*
       Let the user know that it increased the finished hour.
       Maybe display the target left hour
@@ -154,6 +158,8 @@ export const selectPomodoroTime = state => {
 }
 
 export const selectExertionList = state => state.pomodoro.exertionList
+
+export const selectStartRunningValue = state => state.pomodoro.startRunningValue
 
 export const selectMode = state => state.pomodoro.mode
 

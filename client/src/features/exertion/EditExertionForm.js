@@ -60,6 +60,7 @@ const EditExertionForm = () => {
     dispatch(
       editExertion(formData)
     );
+    window.location.reload(false);
   }
 
   return (

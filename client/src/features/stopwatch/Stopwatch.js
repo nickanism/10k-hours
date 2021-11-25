@@ -90,10 +90,11 @@ const Stopwatch = () => {
           id="exertionId"
           name="exertionId"
           placeholder="Choose Exertion"
+          disabled={!exertionList}
           value={exertionId}
           onChange={onChange}
         > 
-          <option>Please select</option>
+          <option>{!exertionList ? "fetching..." : "Please select"}</option>
           {mainExertionOptions}
         </select>
       </section>
@@ -101,7 +102,7 @@ const Stopwatch = () => {
         <div className="grid">
           &nbsp;
           <button 
-            disabled={stopwatchIsRunning} 
+            disabled={stopwatchIsRunning || !exertionId} 
             onClick={() => {dispatch(startStopwatch())}}>START</button>
           <button 
             disabled={!stopwatchIsRunning || !stopwatchValue} 

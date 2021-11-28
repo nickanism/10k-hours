@@ -7,6 +7,7 @@ import {
   selectExertionList,
   fetchAllExertions
 } from '../exertion/exertionSlice';
+import { secondsToHMS } from '../../utils/timeUtils';
 import { 
   exertionListValidate,
   exertionOptionList 
@@ -65,7 +66,7 @@ const Stopwatch = () => {
   const onFinish = async e => {
     e.preventDefault();
     dispatch(pause())
-    if (window.confirm(`Would you like to save the progress? ${stopwatchValue} seconds will be submitted as the finished progress.`)) {
+    if (window.confirm(`Would you like to save the progress? ${secondsToHMS(stopwatchValue)} will be submitted as the finished progress.`)) {
       window.alert("hell yeah")
       dispatch(
         sendStopwatchDuration(exertionId, stopwatchValue)
@@ -83,7 +84,7 @@ const Stopwatch = () => {
         <h2>Stopwatch</h2>
         
       </header>
-      <h2>{stopwatchValue}</h2>
+      <h2>{secondsToHMS(stopwatchValue)}</h2>
       <section className="stopwatchExertionSelection">
         <select
           size="1"

@@ -34,6 +34,12 @@ export const durationToHMS = duration => {
   return { hours, minutes, seconds }
 }
 
+export const secondsToHMS = seconds => {
+  const result 
+    = new Date(seconds * 1000).toISOString().substr(11, 8);
+  return result;
+}
+
 export const pomodoroExertionListDisplay 
   = exertions => {
     let displayArray = []

@@ -4,8 +4,8 @@ import {
   useSelector
 } from 'react-redux';
 
-import cookieThePom from '../../static/cookie-the-pom.jpg';
 import corgiStudying from '../../static/corgi_studying_masters.jpeg';
+import exampleGif_img from '../../static/example-animated.gif';
 import { 
   selectIsAuthenticated  
 } from '../../features/auth/authSlice';
@@ -15,10 +15,10 @@ export const Landing = () => {
     = useSelector(selectIsAuthenticated);
 
   const signUpSignIn = (
-    <section>
-      <h2>
-        You can create your exertion by signing up!
-      </h2>
+    <article className="landingSignUpBlock">
+      <h4>
+        Sign up for free and master it!
+      </h4>
       <div className="container grid">
         <Link role="button" to='/signup'>
           Sign Up
@@ -27,7 +27,30 @@ export const Landing = () => {
           Sign In
         </Link>
       </div>
-    </section>
+    </article>
+  )
+
+  const landingIntroduction = (
+    <>
+      <article className="grid">
+        <div>
+          <hgroup>
+            <h1>Gamify your training</h1>
+            <h3>Honing hard skills can be difficult. After spending long hours grinding and tracking your progress manually on paper, you may find yourself frustrated with the anticlimactic outcome. <br />10K Hours provides a visual tracking system, which makes your hard work a more tangible experience.
+            </h3>
+          </hgroup>
+          <img 
+            src={exampleGif_img} alt="example_user_interface" 
+          />
+          {signUpSignIn}
+        </div>
+        <div>
+          <img 
+            src={corgiStudying} alt="studying" 
+          />
+        </div>
+      </article>
+    </>
   )
 
   const goToDashboard = (
@@ -42,11 +65,9 @@ export const Landing = () => {
 
   return (
     <section className="container">
-      <h1>Embark on a journey to mastery</h1>
-      { isAuthenticated ? <h3>Welcome!</h3> : signUpSignIn }
-      <img 
-        src={corgiStudying} alt="studying" 
-      />
+      { isAuthenticated ? <h3>Welcome Back!</h3> : 
+        landingIntroduction  
+      }
     </section>
   )
 }

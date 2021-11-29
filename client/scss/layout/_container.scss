@@ -15,41 +15,50 @@
   .container {
     @if map-get($breakpoints, "sm") {
       @media (min-width: map-get($breakpoints, "sm")) {
-        @media (min-resolution: 280dpi) {
+        
+        max-width: map-get($viewports, "sm");
+        padding-right: 0;
+        padding-left: 0;
+
+        @media (min-resolution: 200dpi) {
           max-width: 95%;
           padding-right: 0;
           padding-left: 0;
         }
-        max-width: map-get($viewports, "sm");
-        padding-right: 0;
-        padding-left: 0;
       }
     }
 
     @if map-get($breakpoints, "md") {
       @media (min-width: map-get($breakpoints, "md")) {
-        @media (min-resolution: 280dpi) {
+
+        max-width: map-get($viewports, "md");
+
+        @media (min-resolution: 250dpi) {
           max-width: 95%;
           padding-right: 0;
           padding-left: 0;
         }
-        max-width: map-get($viewports, "md");
       }
     }
 
     @if map-get($breakpoints, "lg") {
       @media (min-width: map-get($breakpoints, "lg")) {
+        max-width: map-get($viewports, "lg");
         @media (min-resolution: 380dpi) {
           max-width: 93%;
           padding-right: 0;
           padding-left: 0;
         }
-        max-width: map-get($viewports, "lg");
       }
     }
 
     @if map-get($breakpoints, "xl") {
       @media (min-width: map-get($breakpoints, "xl")) {
+        @media (min-resolution: 450dpi) {
+          max-width: 95%;
+          padding-right: 0;
+          padding-left: 0;
+        }
         max-width: map-get($viewports, "xl");
       }
     }

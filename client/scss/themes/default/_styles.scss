@@ -17,24 +17,42 @@
   @if $enable-responsive-typography {
     @if map-get($breakpoints, "sm") {
       @media (min-width: map-get($breakpoints, "sm")) {
+        @media (min-resolution: 300dpi) {
+          --font-size: 2rem;
+          --block-spacing-vertical: calc(var(--spacing) * 5);
+          --block-spacing-horizontal: calc(var(--spacing) * 2);
+        }
         --font-size: 17px;
       }
     }
 
     @if map-get($breakpoints, "md") {
       @media (min-width: map-get($breakpoints, "md")) {
+        @media (min-resolution: 280dpi) {
+          --font-size: 2rem;
+          --block-spacing-vertical: calc(var(--spacing) * 5);
+          --block-spacing-horizontal: calc(var(--spacing) * 1.5);
+        }
         --font-size: 18px;
       }
     }
 
     @if map-get($breakpoints, "lg") {
       @media (min-width: map-get($breakpoints, "lg")) {
+        @media (min-resolution: 450dpi) {
+          --font-size: 2rem;
+          --block-spacing-vertical: calc(var(--spacing) * 5);
+          --block-spacing-horizontal: calc(var(--spacing) * 4);
+        }
         --font-size: 19px;
       }
     }
 
     @if map-get($breakpoints, "xl") {
       @media (min-width: map-get($breakpoints, "xl")) {
+        @media (min-resolution: 450dpi) {
+          --font-size: 30px;
+        }
         --font-size: 20px;
       }
     }
@@ -103,18 +121,27 @@
   article {
     @if map-get($breakpoints, "sm") {
       @media (min-width: map-get($breakpoints, "sm")) {
+        @media (min-resolution: 280dpi) {
+          --block-spacing-horizontal: calc(var(--spacing) * 1);
+        }
         --block-spacing-horizontal: calc(var(--spacing) * 1.25);
       }
     }
 
     @if map-get($breakpoints, "md") {
       @media (min-width: map-get($breakpoints, "md")) {
+        @media (min-resolution: 280dpi) {
+          --block-spacing-horizontal: calc(var(--spacing) * 1);
+        }
         --block-spacing-horizontal: calc(var(--spacing) * 1.5);
       }
     }
 
     @if map-get($breakpoints, "lg") {
       @media (min-width: map-get($breakpoints, "lg")) {
+        @media (min-resolution: 400dpi) {
+          --block-spacing-horizontal: calc(var(--spacing) * 1.5);
+        }
         --block-spacing-horizontal: calc(var(--spacing) * 1.75);
       }
     }

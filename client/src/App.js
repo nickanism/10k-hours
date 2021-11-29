@@ -26,7 +26,7 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <div className="main">
+      <main className="main">
         <Routes>
           <Route
             path="/"
@@ -138,7 +138,7 @@ function App() {
           >
           </Route>
         </Routes>
-      </div>
+      </main>
     </BrowserRouter>
   );
 }
